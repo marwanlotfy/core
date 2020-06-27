@@ -3,6 +3,6 @@ export default Book = {
     name : '',
     category : null,
     price : '',
-    author : '',
+    authorName : '',
     edition : '',
 }

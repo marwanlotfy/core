@@ -1,3 +1,5 @@
+import { BookValidator } from "../../infrastracture";
+
 export default class BookServices{
     constructor(){
         this.bookValidator = new BookValidator;
