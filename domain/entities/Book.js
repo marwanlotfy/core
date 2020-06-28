@@ -1,8 +1,9 @@
-export default Book = {
-    id :'',
-    name : '',
-    category : null,
-    price : '',
-    authorName : '',
-    edition : '',
+function Book() {
+    this.id =''
+    this.name = ''
+    this.category = null
+    this.price = ''
+    this.authorName = ''
+    this.edition = ''
 }
+export default Book ;

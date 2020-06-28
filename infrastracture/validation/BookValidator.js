@@ -1,23 +1,57 @@
 export default class BookValidator{
     constructor(){
-        this.errors = {};
-        this.isValid = true;
+        this.errors = {
+            name:'',
+            price:'',
+            authorName:'',
+        };
     }
-    validate(book){
-        if (!book.name) {
-            this.isValid = false
-            this.errors['name'] = 'name can\'t be empty'    
+    validateBookField(field,value){
+        switch (field) {
+            case 'name':
+                if (!value) {
+                    this.errors['name'] = 'name can\'t be empty'    
+                }else{
+                    this.errors['name'] = ''
+                }
+                break;
+
+            case 'price':
+                if (isNaN(value)) {
+                    this.errors['price'] = 'price must be a vaild price'
+                }else if (value == ''){
+                    this.errors['price'] = 'price can\'t be empty'    
+                }else if (value <= 0) {
+                    this.errors['price'] = 'price must be a greater than zero'
+                }else{
+                    this.errors['price'] = ''
+                }
+                break;
+
+            case 'authorName':
+                if (!value) {
+                    this.isValid = false
+                    this.errors['authorName'] = 'author name can\'t be empty'    
+                }else{
+                    this.errors['authorName'] = ''
+                }
+                break;
+                
         }
-        if (isNaN(book.price)) {
-            this.isValid = false
-            this.errors['price'] = 'price must be a vaild price'
-        }else if (book.price < 0) {
-            this.isValid = false
-            this.errors['price'] = 'price must be a vaild price'
+    }
+    hasErrors(){
+        for (const prop in this.errors) {
+            if (this.errors.hasOwnProperty(prop) && (this.errors[prop]!=='')) {
+                return true
+            }
         }
-        if (!book.authorName) {
-            this.isValid = false
-            this.errors['authorName'] = 'author name can\'t be empty'    
-        }
+        return false
+    }
+    hasErrorFor(field){
+        return (this.errors[field] != '' );
+    }
+
+    getErrorFor(field){
+        return this.errors[field];
     }
 }
