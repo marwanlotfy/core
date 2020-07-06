@@ -1,23 +1,13 @@
+import QueryBuilder from "../networking/QueryBuilder";
+import NetworkAgentFactory from "../networking/NetworkAgentFactory";
+import { baseUrl } from "../../../config";
+
 export default class BookRepository {
+    constructor(){
+        this.networkAgent = NetworkAgentFactory.create();
+    }
     getBooks(callback,filter){
-        let books =[
-            {
-                id :1,
-                name : 'macbeth',
-                category : 'horrer',
-                price : 120,
-                authorName : 'shakesper',
-                edition : 'first',
-            },
-            {
-                id :2,
-                name : 'macbeth',
-                category : 'horrer',
-                price : 120,
-                authorName : 'shakesper',
-                edition : 'first',
-            },
-        ];
-        callback(books);
+        let api = QueryBuilder.build(`${baseUrl}book`,filter);
+        this.networkAgent.get(api, callback );
     }
 }
